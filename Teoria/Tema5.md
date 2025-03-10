@@ -111,10 +111,41 @@ $$h \overset{\text{FT}}{\rightarrow} H$$
 ![teorema_combulucion.png](images/teorema_combulucion.png)
 La convolución en el espacio equivale a un producto en la frecuencia. Es decir, si tenemos dos señales $f(x,y)$ y $g(x,y)$, la convolución de estas señales en el espacio es igual al producto de las transformadas de Fourier de estas señales en la frecuencia:
 
+El teorema demuestra que independientemente del tamaño de la mascara, el tiempo de ejecucion es el mismo.
+![coste_computacional.png](images/coste_computacional.png)
+
 ## Filtrado espacio / Filtrado frecuencia
 
+### Filtro Media vs Filtro Gaussiano
+El filtro media es un filtro que se utiliza para suavizar una imagen. Este filtro se aplica a una imagen para eliminar el ruido y las imperfecciones de la imagen. El filtro media calcula el promedio de los píxeles vecinos de un píxel y reemplaza el valor del píxel por el promedio de los píxeles vecinos. En otras palabras es un filtro de paso bajo.
+
+El filtro gaussiano en el espacio tiene sentido ya que deja pasar las frecuencias bajas y 
+![filtro_media_vs_gaussiano.png](images/filtro_media_vs_gaussiano.png)
+
 ## Filtrado en la frecuencia
+Si tenemos un ruido frecuencial, lo que hacemos es ver la imagen frecuencial y eliminar las frecuencias que no cumplen con el patron de frecuencia.
+![filtrado_en_frecuencia.png](images/filtrado_en_frecuencia.png)
+
+#### Filtro paso bajo
+En este caso hacemos lo llamado fitrado de distancia que es que las frecuencias lejanas al centron de la imagen se atenuan y las frecuencias cercanas al centro se dejan pasar.
+![filtro_paso_bajo.png](images/filtro_paso_bajo.png)
+
+#### Filtro paso alto
+En este caso hacemos lo llamado fitrado de distancia que es que las frecuencias cercanas al centron de la imagen se atenuan y las frecuencias lejanas al centro se dejan pasar.
+![filtro_paso_alto.png](images/filtro_paso_alto.png)
+Un detalle de los filtros paso alto, es que me permite visualizar los bordes de una imagen.
 
 ## Filtros especificos
+Filtros diseñados mediante técnicas de tratamiento de señal
+
+Versiones discretas de filtros analógicos conocidos:
+Butterworth, Chebyshev, Elípticos
+### No se estudia
+![filtros_especificos.png](images/filtros_especificos.png)
 
 ## Magnitud vs FAse
+Cuando usamos la transformada de Fourier, podemos trabajar con la magnitud o con la fase de la transformada. La magnitud de la transformada de Fourier nos da información sobre la energía de las frecuencias en la imagen, mientras que la fase de la transformada de Fourier nos da información sobre la posición de las frecuencias en la imagen.
+
+¿Que contiene mas informacion la magnitud o la fase?
+
+La magnitud de la transformada de Fourier contiene más información que la fase. La magnitud de la transformada de Fourier nos da información sobre la energía de las frecuencias en la imagen, mientras que la fase de la transformada de Fourier nos da información sobre la posición de las frecuencias en la imagen.
