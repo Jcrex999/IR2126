@@ -5,11 +5,7 @@
 El teorema de la convolución nos dice que la convolución en el espacio es equivalente a la multiplicación en la frecuencia.
 
 En los resultados que optenemos se puede ver que la convolución en el espacio y la multiplicación en la frecuencia son
-equivalentes, mas no iguales. Esto se debe a que la convolución en el espacio es un proceso que se realiza en un
-espacio discreto, mientras que la multiplicación en la frecuencia es un proceso que se realiza en un espacio continuo.
-
-Esto se debe a que la convolución interpola los valores de la imagen, mientras que la multiplicación en la frecuencia no.
-
+iguales. Pero a diferencia de la mascara 7x7, esta imagen se ve mas nitida.
 """
 
 import skimage as ski
@@ -19,13 +15,28 @@ import scipy
 import scipy.fft as fft
 
 MASK_SIZE = 5
+SIGMA = 5
 
 imagen = ski.io.imread("images/boat.511.tiff")
 imagen = ski.util.img_as_float(imagen)
 
+# Hacer una mascara gaussiana de tamaño 5x5 y sigma 5
+def mascara_gaussiana_unidimencional(tam, sigma):
+    vector = scipy.signal.windows.gaussian(tam, sigma)
+    vector /= np.sum(vector)
+    return vector
+
+def mascara_gaussiana_bidimencional(tam, sigma):
+    vector = mascara_gaussiana_unidimencional(tam, sigma)
+    vectorH = vector.reshape(1, tam)
+    vectorV = vector.reshape(tam, 1)
+    return vectorV @ vectorH
+
+mascara = mascara_gaussiana_bidimencional(MASK_SIZE, SIGMA)
+
+mascara /= np.sum(mascara)
+
 # Convolución en el espacio
-mascara = np.ones((MASK_SIZE, MASK_SIZE))  # Máscara de NxN toda con 1
-mascara /= np.sum(mascara)  # Máscara normalizada
 res_convol = scipy.ndimage.convolve(imagen, mascara, mode="wrap")
 
 # Ampliamos la máscara con ceros para que tenga el mismo tamaño que la imagen
