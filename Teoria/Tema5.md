@@ -17,6 +17,7 @@ Donde $|X(f)|$ es la magnitud de la transformada de Fourier y $\angle X(f)$ es l
 ![Descripción de la imagen](images/frecuencias_fourier.png)
 
 ![suma_de_frecuencias.png](images/suma_de_frecuencias.png)
+
 Se puede observar que entre mas frecuencias se sumen, la señal resultante se acercara a los valores de la señal original.
 
 Cuando trabajamos con una imagen, esta es una señal discreta de dos dimensiones, por lo que la transformada de Fourier se define como:
@@ -26,7 +27,9 @@ $$X(u,v) = \sum_{m=0}^{M-1} \sum_{n=0}^{N-1} x(m,n) e^{-j2\pi (\frac{um}{M} + \f
 Donde $X(u,v)$ es la transformada de Fourier de la imagen $x(m,n)$, $u$ y $v$ son las frecuencias en las direcciones horizontal y vertical, respectivamente, y $M$ y $N$ son las dimensiones de la imagen.
 
 En la siguiente imagen se ve como afecta cada una de las oscilaciones en una imagen, donde las zonas negras representan cuando la frecuencia es negativa y las zonas blancas representan cuando la frecuencia es positiva.
+
 ![ejemplo_de_frecuencia_en_imagen.png](images/ejemplo_de_frecuencia_en_imagen.png)
+
 Entre mas franjas tiene la imagen, mas frecuencias contiene.
 
 ## Transformada discreta de Fourier
@@ -42,7 +45,7 @@ Cada componente de frecuencia es un número complejo.
 $$ H(u,v) = R(u,v) + jI(u,v)$$
 * Magnitud / fase
 $$ |H(u,v)| = \sqrt{R^2(u,v) + I^2(u,v)}$$
-$$ \theta(u,v) = tan^-1(\frac{I(u,v)}{R(u,v)}) $$
+$$ \theta(u,v) = tan^{-1}(\frac{I(u,v)}{R(u,v)}) $$
 
 En la siguiente imagen se muestra como se ve la transformada de Fourier de una imagen.
 
@@ -52,7 +55,7 @@ En la siguiente imagen se muestra como se ve la transformada de Fourier de una i
 ### Posible pregunta de examen
 Cuando trabajamos con frecuencias, los colores uniformes y las zonas uniformes tienen bajas frecuencias, mientras que los bordes, las texturas y el ruido tienen altas frecuencias.
 
-Por lo cual, nosotros nunca prodremos eliminar el ruido sin eliminar el ruido ya que, los bordes trabajan en bajas frecuencias
+Por lo cual, nosotros nunca prodremos eliminar el ruido sin eliminar los bordes ya que, los bordes trabajan en bajas frecuencias
 
 ## Ruido blanco
 Es un tipo de ruido que contiene todas las frecuencias en la misma cantidad. Es decir, todas las frecuencias tienen la misma amplitud. En el dominio de la frecuencia, el ruido blanco se ve como una distribución uniforme de energía en todas las frecuencias.
@@ -64,6 +67,7 @@ Es un tipo de ruido que contiene todas las frecuencias en la misma cantidad. Es 
 Cuando se hace la tranformada cada cuadrante es simetrico, por lo cual se puede hacer un truco para visualizar la transformada de Fourier de una imagen, que es hacer un shift de la imagen para que el origen de la imagen sea el centro de la imagen.
 
 ![transformada_optica.png](images/transformada_optica.png)
+
 En esta imagen, cambiamos la visualizacion de los puntos de la tranformada para que el centro este el conjuto de puntos mas brillantes. 
 
 A esta transformacion se le llama tranformacion optica, y se usa para visualizar la transformada de Fourier de una imagen. 
@@ -109,9 +113,11 @@ $$h \overset{\text{FT}}{\rightarrow} H$$
 
 ### Teorema de la convolución
 ![teorema_combulucion.png](images/teorema_combulucion.png)
+
 La convolución en el espacio equivale a un producto en la frecuencia. Es decir, si tenemos dos señales $f(x,y)$ y $g(x,y)$, la convolución de estas señales en el espacio es igual al producto de las transformadas de Fourier de estas señales en la frecuencia:
 
 El teorema demuestra que independientemente del tamaño de la mascara, el tiempo de ejecucion es el mismo.
+
 ![coste_computacional.png](images/coste_computacional.png)
 
 ## Filtrado espacio / Filtrado frecuencia
@@ -120,19 +126,24 @@ El teorema demuestra que independientemente del tamaño de la mascara, el tiempo
 El filtro media es un filtro que se utiliza para suavizar una imagen. Este filtro se aplica a una imagen para eliminar el ruido y las imperfecciones de la imagen. El filtro media calcula el promedio de los píxeles vecinos de un píxel y reemplaza el valor del píxel por el promedio de los píxeles vecinos. En otras palabras es un filtro de paso bajo.
 
 El filtro gaussiano en el espacio tiene sentido ya que deja pasar las frecuencias bajas y 
+
 ![filtro_media_vs_gaussiano.png](images/filtro_media_vs_gaussiano.png)
 
 ## Filtrado en la frecuencia
 Si tenemos un ruido frecuencial, lo que hacemos es ver la imagen frecuencial y eliminar las frecuencias que no cumplen con el patron de frecuencia.
+
 ![filtrado_en_frecuencia.png](images/filtrado_en_frecuencia.png)
 
 #### Filtro paso bajo
 En este caso hacemos lo llamado fitrado de distancia que es que las frecuencias lejanas al centron de la imagen se atenuan y las frecuencias cercanas al centro se dejan pasar.
+
 ![filtro_paso_bajo.png](images/filtro_paso_bajo.png)
 
 #### Filtro paso alto
 En este caso hacemos lo llamado fitrado de distancia que es que las frecuencias cercanas al centron de la imagen se atenuan y las frecuencias lejanas al centro se dejan pasar.
+
 ![filtro_paso_alto.png](images/filtro_paso_alto.png)
+
 Un detalle de los filtros paso alto, es que me permite visualizar los bordes de una imagen.
 
 ## Filtros especificos
@@ -141,9 +152,10 @@ Filtros diseñados mediante técnicas de tratamiento de señal
 Versiones discretas de filtros analógicos conocidos:
 Butterworth, Chebyshev, Elípticos
 ### No se estudia
+
 ![filtros_especificos.png](images/filtros_especificos.png)
 
-## Magnitud vs FAse
+## Magnitud vs Fase
 Cuando usamos la transformada de Fourier, podemos trabajar con la magnitud o con la fase de la transformada. La magnitud de la transformada de Fourier nos da información sobre la energía de las frecuencias en la imagen, mientras que la fase de la transformada de Fourier nos da información sobre la posición de las frecuencias en la imagen.
 
 ¿Que contiene mas informacion la magnitud o la fase?

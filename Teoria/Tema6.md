@@ -40,6 +40,7 @@ b. Realzado
 ## ¿Que es el gradiente?
 
 El gradiente es un vector que indica la dirección y la magnitud del cambio más rápido en una función. En el caso de una imagen, el gradiente indica la dirección y la magnitud del cambio más rápido en la intensidad de los píxeles.
+
 ![que_es_gradiente.png](images/que_es_gradiente.png)
 
 El gradiente se calcula de la siguiente manera:
@@ -48,7 +49,9 @@ $$\nabla f = \begin{bmatrix} \frac{\partial f}{\partial x} \\ \frac{\partial f}{
 Siendo $\nabla f$ el gradiente de la imagen, $\frac{\partial f}{\partial x}$ la derivada parcial de la imagen en la dirección x y $\frac{\partial f}{\partial y}$ la derivada parcial de la imagen en la dirección y.
 
 Si se calcula cada uno de los componentes del gradiente, se obtiene el gradiente de la imagen en cada punto.
+
 ![calculo_de_gradiente.png](images/calculo_de_gradiente.png)
+
 ![componentes_gradientes.png](images/componentes_gradientes.png)
 
 ## Magnitud y orientacion del gradiente
@@ -60,6 +63,7 @@ La orientación del gradiente es el ángulo que forma el vector gradiente con el
 $$\text{orientación} = \arctan(\frac{\frac{\partial f}{\partial y}}{\frac{\partial f}{\partial x}})$$
 
 La magnitud y la orientación del gradiente se utilizan para detectar bordes en una imagen. La magnitud del gradiente indica la intensidad del cambio en la imagen, mientras que la orientación del gradiente indica la dirección del cambio en la imagen.
+
 ![magnitud_orientacion_bordes.png](images/magnitud_orientacion_bordes.png)
 
 ## Filtros de realzado
@@ -101,7 +105,9 @@ Si se supera el umbral, se considera borde.
 La binarización de la magnitud del gradiente es un paso importante en la detección de bordes en una imagen. La binarización de la magnitud del gradiente consiste en convertir la magnitud del gradiente en una imagen binaria, donde los píxeles que superan un cierto umbral se consideran bordes y los píxeles que no superan el umbral no se consideran bordes.
 
 ![binarizacion_gradiente.png](images/binarizacion_gradiente.png)
+
 ![detectores_bordes.png](images/detectores_bordes.png)
+
 ![aproximacion_gaussiana.png](images/aproximacion_gaussiana.png)
 
 ## Detector de Bordes de Canny
@@ -117,6 +123,7 @@ El detector de bordes de Canny es un algoritmo avanzado para detectar bordes en 
 - **Respuesta única**: Genera una sola respuesta por borde, evitando respuestas múltiples.
 
 ![detector_canny_2.png](images/detector_canny_2.png)
+
 ![detector_canny_supresion_maximos.png](images/detector_canny_supresion_maximos.png)
 
 ### Funcionamiento del algoritmo
@@ -156,6 +163,7 @@ Lo que buscamos cuando calculamos la laplaciana es encontrar los cambios de en c
 
 La laplaciana se calcula de la siguiente manera:
 $$\nabla^2 f(x,y) = \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2}$$
+
 ![laplaciana_2.png](images/laplaciana_2.png)
 
 ## Filtros de la laplaciana
@@ -176,8 +184,11 @@ $$LoG(x,y) = \nabla^2 G(x,y) = \frac{\partial^2 G}{\partial x^2} + \frac{\partia
 $$\nabla^2G=(\frac{x^2+y^2-2\xi^2}{\xi^4}) e^{\frac{x^2+y^2}{2\xi^2}}$$
 
 ![log1.png](images/log1.png)
+
 ![log2.png](images/log2.png)
+
 ![log3.png](images/log3.png)
+
 ![log4.png](images/log4.png)
 
 ## Espacio Escala
@@ -213,6 +224,7 @@ Las esquinas son puntos en una imagen donde se encuentran dos bordes. Las esquin
   * Otros métodos
 
 ![esquinas_basado_mascara.png](images/esquinas_basado_mascara.png)
+
 ![esquinas_mascaras_2.png](images/esquinas_mascaras_2.png)
 
 ### Basados en derivadas de 2º orden
@@ -229,16 +241,25 @@ El detector de esquinas de Kitchen-Rosenfeld es un algoritmo para detectar esqui
 
 Cumple un criterio de deteccion:
 ![kitchen.png](images/kitchen.png)
+
 ![kitchen2.png](images/kitchen2.png)
 
-### Harris-Stephens
+### Moravec Harris-Stephens
+
+El algoritmo moravec trabaja con varias ventanas para detectar esquinas, y se basa en la idea de que una esquina es un punto en una imagen donde la curvatura es máxima en todas las direcciones.
+
+Esto produce que la función pueda detectar multiples esquinas en una sola esquina.
+
+Ademas, Harris-Stephens propusieron una mejora a base de las derivadas en x e y de la imagen.
+
 ![moravec.png](images/moravec.png)
+
 ![moravec2.png](images/moravec2.png)
 
 ![harris.png](images/harris.png)
 
-### FAST
-Esta basado en el extractor de caracteristicas AST (Accelerated Segment Test) que es un detector de esquinas rápido y eficiente. Este detector se basa en la idea de que una esquina es un punto en una imagen donde hay una transición brusca de intensidad en todas las direcciones.
+### FAST (Pregunta de examen)
+Esta basado en el extractor de caracteristicas AST (Accelerated Segment Test) que es un detector de esquinas rápido y eficiente. Este detector se basa en buscar puntos consecutivos que sean más brillantes que sus vecinos en un círculo de radio r centrado en el punto.
 
 Se considera un círculo de radio r centrado en c
 * Si n o más puntos consecutivos son más brillantes que c por un umbral t (o menos), el punto se considera una característica
@@ -246,3 +267,14 @@ Se considera un círculo de radio r centrado en c
 * El orden en el que se chequean los píxeles influye en la eficiencia del método
 
 ![FAST.png](images/FAST.png)
+
+### Förstner & Gülch
+El detector de esquinas de Förstner & Gülch es un algoritmo que busca el punto más cercano a todas las tangentes de la posible esquina en una ventana dada (el gradiente es perpendicular al contorno)
+* En el caso ideal, todas las tangentes convergen en un único punto
+* La distancia a cada tangente se pondera por la magnitud del gradiente
+* Resolución por mínimos cuadrados
+
+Busca en cada ventana de tamaño fijo, el punto que minimiza la función.
+
+![Förstner.png](images/F%C3%B6rstner.png)
+

@@ -74,15 +74,22 @@ class Convuluciones():
             a.set_axis_off()
         plt.show()
 
-        # Gráfica de tiempos en el eje x los tamaños de las máscaras y en el eje y los tiempos de ejecución
-        tiempo2D_mean = np.mean(self.tiempos2D)
-        tiempo1D_mean = np.mean(self.tiempos1D)
-        plt.plot(self.tiempos2D, color='red')
-        plt.plot(self.tiempos1D, color='blue')
-        plt.axhline(y=tiempo2D_mean, color='red', linestyle='--')
-        plt.axhline(y=tiempo1D_mean, color='blue', linestyle='--')
+        # Calculamos promedios por tamaño de máscara
+        tiempos2D_promedio = []
+        tiempos1D_promedio = []
+        tamanos = list(range(3, self.mask_size + 1, 2))
+
+        for i in range(0, len(self.tiempos2D), 10):
+            tiempos2D_promedio.append(np.mean(self.tiempos2D[i:i + 10]))
+            tiempos1D_promedio.append(np.mean(self.tiempos1D[i:i + 10]))
+
+        plt.figure()
+        plt.plot(tamanos, tiempos2D_promedio, 'r-', label='Convolución 2D')
+        plt.plot(tamanos, tiempos1D_promedio, 'b-', label='Convoluciones 1D')
         plt.xlabel("Tamaño de la máscara")
-        plt.ylabel("Tiempo de ejecución")
+        plt.ylabel("Tiempo promedio (s)")
+        plt.legend()
+        plt.grid(True)
         plt.show()
 
     def run(self):
